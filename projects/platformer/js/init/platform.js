@@ -41,6 +41,7 @@
         createPlatform(740, 350, 0.4); //final platform (technically)
         createPlatform(350, 525, 0.9); //second from top
         createPlatform(150, 425, 0.9); //very middle platform
+        createPlatform(430, 275, 0.4); //middle top platform
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
