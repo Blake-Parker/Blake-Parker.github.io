@@ -10,7 +10,7 @@
      * 
      * GOAL: Add as many platforms necessary to make your level challenging.
      * 
-     * Use the createPlatform Function to create platforms for the level. 
+     * Use the createPlatform Function to create platforms for the level.
      * 
      * createPlatform() takes these arguments:
      *      
