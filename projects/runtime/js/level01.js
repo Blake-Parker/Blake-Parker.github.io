@@ -94,28 +94,47 @@ var level01 = function (window) {
             };
         }
         
+                function createReward(x,y){
+            var reward = game.createGameItem('reward', 25);
+            reward.x = x;
+            reward.y = y;
+            reward.velocityX = -2;
+            
+            var picture = draw.bitmap('img/Potato.png');
+            picture.x = -25;
+            picture.y = -25;
+            
+            reward.addChild(picture);
+            game.addGameItem(reward);
+            
+            reward.onPlayerCollision = function() {
+                game.increaseScore(50);
+                reward.fadeOut();
+            };
+          
+        }
+        
         
         
         //another reward, WIP
-        function createReward2(x, y){
-            var reward2 = game.createGameItem('reward', 25);
-            var hitZoneSize = 25;
-            var damageFromObstacle = 0;
-            var reward2HitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
-            reward2HitZone.x = x;
-            reward2HitZone.y = y;
-            game.addGameItem(reward2HitZone);
+          function createReward2(x,y){
+            var reward = game.createGameItem('reward', 25);
+            reward.x = x;
+            reward.y = y;
+            reward.velocityX = -2;
             
-            var obstacleImage = draw.bitmap('img/Axe.png');
-            reward2HitZone.addChild(obstacleImage);
-            obstacleImage.x = -75;
-            obstacleImage.y = -75;
+            var picture = draw.bitmap('img/Axe.png');
+            picture.x = -25;
+            picture.y = -25;
             
-            reward2.onPlayerCollision = function() {   
-                game.changeIntegrity(5);
-                game.increaseScore(100);
-                reward2.fadeOut();
+            reward.addChild(picture);
+            game.addGameItem(reward);
+            
+            reward.onPlayerCollision = function() {
+                game.increaseScore(50);
+                reward.fadeOut();
             };
+          
         }
         
         //bonus in between levels
