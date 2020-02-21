@@ -63,7 +63,7 @@ var background = function (window) {
                 if(buildingHeight <= 200){
                     buildingHeight += 100;
                 }
-                var building = draw.rect(75, buildingHeight, 'DarkGray', 'Black', 1);
+                var building = draw.rect(75, buildingHeight, 'Crimson', 'Black', 1);
                 
                 
                 building.x = 200*i;

@@ -12,7 +12,7 @@ var level01 = function (window) {
         // this data will allow us to define all of the
         // behavior of our game
         var levelData = {
-            "name": "Robot Romp",
+            "name": "Soviet Rumble",
             "number": 1, 
             "speed": -3,
             "gameItems": [
@@ -21,12 +21,16 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 900, "y": groundY - 110},
                 { "type": "sawblade", "x": 1300, "y": groundY },
                 { "type": "sawblade", "x": 1800, "y": groundY - 110},
+                { "type": "sawblade", "x": 2300, "y": groundY - 110},
+                { "type": "sawblade", "x": 2600, "y": groundY},
                 { "type": "spike", "x": 1100, "y": groundY - 10},
                 { "type": "spike", "x": 1500, "y": groundY - 10},
                 { "type": "enemy", "x": 500, "y": groundY - 50},
                 { "type": "enemy", "x": 800, "y": groundY - 50},
                 { "type": "enemy", "x": 1200, "y": groundY - 50},
                 { "type": "reward", "x": 850, "y": groundY - 110},
+                { "type": "reward2", "x": 1100, "y": groundY - 75},
+                { "type": "reward2", "x": 1500, "y": groundY - 75},
                 { "type": "reward", "x": 1750, "y": groundY - 110},
                 { "type": "bonus", "x": 2000, "y": groundY - 110}
             ]
@@ -68,7 +72,7 @@ var level01 = function (window) {
             obstacleImage.y = -25;
         
         }
-                
+        //the potato reward        
         function createReward(x, y){
             var reward = game.createGameItem('reward', 25);
             var hitZoneSize = 25;
@@ -83,13 +87,38 @@ var level01 = function (window) {
             obstacleImage.x = -25;
             obstacleImage.y = -25;
             
-            reward.onPlayerCollision = function() {   ////spellcheck
+            reward.onPlayerCollision = function() {   
                 game.changeIntegrity(10);
                 game.increaseScore(100);
                 reward.fadeOut();
             };
         }
         
+        
+        
+        //another reward, WIP
+        function createReward2(x, y){
+            var reward2 = game.createGameItem('reward', 25);
+            var hitZoneSize = 25;
+            var damageFromObstacle = 0;
+            var reward2HitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+            reward2HitZone.x = x;
+            reward2HitZone.y = y;
+            game.addGameItem(reward2HitZone);
+            
+            var obstacleImage = draw.bitmap('img/Axe.png');
+            reward2HitZone.addChild(obstacleImage);
+            obstacleImage.x = -75;
+            obstacleImage.y = -75;
+            
+            reward2.onPlayerCollision = function() {   
+                game.changeIntegrity(5);
+                game.increaseScore(100);
+                reward2.fadeOut();
+            };
+        }
+        
+        //bonus in between levels
         function createBonus(x, y){
             var bonus = game.createGameItem('bonus', 25);
             var hitZoneSize = 50;
@@ -108,7 +137,7 @@ var level01 = function (window) {
                 game.changeIntegrity(100);
                 bonus.fadeOut();
                 
-            }
+            };
             
         }
 
@@ -127,7 +156,7 @@ var level01 = function (window) {
                 
             enemy.addChild(stalin);
                     
-            enemy.onPlayerCollision = function() { ///spellcheck
+            enemy.onPlayerCollision = function() { 
                 game.changeIntegrity(-30);
                 enemy.fadeOut();
             };
@@ -157,6 +186,10 @@ var level01 = function (window) {
             
             if (gameItem.type === 'reward'){
                 createReward(gameItem.x, gameItem.y);
+            }
+            
+            if (gameItem.type === 'reward2'){
+                createReward2(gameItem.x, gameItem.y);
             }
             
             if (gameItem.type === 'bonus'){
