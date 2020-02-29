@@ -37,7 +37,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // BEGIN EDITING YOUR CODE HERE
         //function to make sawblades
@@ -94,7 +94,7 @@ var level01 = function (window) {
             };
         }
         
-                function createReward(x,y){
+            function createReward(x,y){
             var reward = game.createGameItem('reward', 25);
             reward.x = x;
             reward.y = y;
@@ -124,8 +124,8 @@ var level01 = function (window) {
             reward.velocityX = -2;
             
             var picture = draw.bitmap('img/Axe.png');
-            picture.x = -25;
-            picture.y = -25;
+            picture.x = -75;
+            picture.y = -75;
             
             reward.addChild(picture);
             game.addGameItem(reward);
@@ -139,23 +139,22 @@ var level01 = function (window) {
         
         //bonus in between levels
         function createBonus(x, y){
-            var bonus = game.createGameItem('bonus', 25);
-            var hitZoneSize = 50;
-            var damageFromObstacle = 0;
-            var bonusHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
-            bonusHitZone.x = x;
-            bonusHitZone.y = y;
-            game.addGameItem(bonusHitZone);
+            var bonus = game.createGameItem('bonus', 50);
+            bonus.x = x;
+            bonus.y = y;
+            bonus.velocityX = -2;
             
-            var obstacleImage = draw.bitmap('img/USFlag.png');
-            bonusHitZone.addChild(obstacleImage);
-            obstacleImage.x = -75;
-            obstacleImage.y = -75;
+            var picture = draw.bitmap('img/USFlag.png');
+            picture.x = -75;
+            picture.y = -75;
             
-            bonus.onPlayerCollision = function(){
-                game.changeIntegrity(100);
+            bonus.addChild(picture);
+            game.addGameItem(bonus);
+            
+            bonus.onPlayerCollision = function() {
+                game.increaseScore(100);
+                game.changeIntegrity(1000)
                 bonus.fadeOut();
-                
             };
             
         }
