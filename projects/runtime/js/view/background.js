@@ -27,6 +27,9 @@ var background = function (window) {
         
         // ANIMATION VARIABLES HERE:
         var tree;
+        var tank;
+        var plane;
+        var lvl;
         var buildings = [];
         
      
@@ -57,6 +60,12 @@ var background = function (window) {
             moon.scaleY = 0.5;
             background.addChild(moon);
             
+            plane = draw.bitmap('img/plane.png');
+            plane.x = 0;
+            plane.y = groundY - 350;
+            background.addChild(plane);
+            
+            
             // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             for(var i = 0; i < 7; i++) {
                 var buildingHeight = 300*Math.random();
@@ -78,15 +87,17 @@ var background = function (window) {
             tree.y = 185;
             background.addChild(tree);
             
+            tank = draw.bitmap('img/tank.png');
+            tank.x = 900;
+            tank.y = groundY - 100;
+            tank.scaleX = 2.5;
+            tank.scaleY = 2.5;
+            background.addChild(tank);
             
-            var level2 = draw.bitmap('img/level2.png');
-            level2.x = 2500;
-            level2.y = groundY - 233;
-            level2.scaleX = 1.5;
-            level2.scaleY = 1.5;
-            background.addChild(level2);
-            
-
+            lvl = draw.bitmap('img/level2.png');
+            lvl.x = 2000;
+            lvl.y = groundY - 350;
+            background.addChild(lvl);
         } // end of render function - DO NOT DELETE
         
         
@@ -101,9 +112,23 @@ var background = function (window) {
             // TODO 4: Part 2 - Move the tree!
             tree.x = tree.x - 3;
             
+            plane.x = plane.x - 10;
+            
+            tank.x = tank.x - 4;
+            
+            lvl.x = lvl.x - 2
+            
                         
             if(tree.x < -200) {
                 tree.x = canvasWidth;
+            }
+            
+            if(plane.x < -2000){
+                plane.x = canvasWidth;
+            }
+            
+            if(tank.x < -1000){
+                tank.x = canvasWidth;
             }
             
             

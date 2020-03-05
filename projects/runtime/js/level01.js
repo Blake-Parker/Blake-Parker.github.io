@@ -23,21 +23,28 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 1800, "y": groundY - 110},
                 { "type": "sawblade", "x": 2300, "y": groundY - 110},
                 { "type": "sawblade", "x": 2600, "y": groundY},
+                { "type": "sawblade", "x": 3000, "y": groundY - 110},
                 { "type": "spike", "x": 1100, "y": groundY - 10},
                 { "type": "spike", "x": 1500, "y": groundY - 10},
+                { "type": "spike", "x": 2450, "y": groundY - 10},
+                { "type": "spike", "x": 2850, "y": groundY - 10},
+                { "type": "spike", "x": 3150, "y": groundY - 10},
                 { "type": "enemy", "x": 500, "y": groundY - 50},
                 { "type": "enemy", "x": 800, "y": groundY - 50},
                 { "type": "enemy", "x": 1200, "y": groundY - 50},
+                { "type": "enemy2", "x": 2450, "y": groundY - 50},
+                { "type": "enemy2", "x": 2750, "y": groundY - 50},
                 { "type": "reward", "x": 850, "y": groundY - 110},
+                { "type": "reward", "x": 1750, "y": groundY - 110},
                 { "type": "reward2", "x": 1100, "y": groundY - 75},
                 { "type": "reward2", "x": 1500, "y": groundY - 75},
-                { "type": "reward", "x": 1750, "y": groundY - 110},
+                { "type": "reward3", "x": 600, "y": groundY - 75},
                 { "type": "bonus", "x": 2000, "y": groundY - 110}
             ]
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(false);
+        game.setDebugMode(true);
 
         // BEGIN EDITING YOUR CODE HERE
         //function to make sawblades
@@ -73,7 +80,7 @@ var level01 = function (window) {
         
         }
         //the potato reward        
-        function createReward(x, y){
+       /* function createReward(x, y){
             var reward = game.createGameItem('reward', 25);
             var hitZoneSize = 25;
             var damageFromObstacle = 0;
@@ -93,16 +100,42 @@ var level01 = function (window) {
                 reward.fadeOut();
             };
         }
-        
+        */
+        //potatoes, good for your heart.
             function createReward(x,y){
             var reward = game.createGameItem('reward', 25);
             reward.x = x;
             reward.y = y;
             reward.velocityX = -2;
+            reward.rotationalVelocity = -1.5;
             
             var picture = draw.bitmap('img/Potato.png');
             picture.x = -25;
             picture.y = -25;
+            
+            reward.addChild(picture);
+            game.addGameItem(reward);
+            
+            reward.onPlayerCollision = function() {
+                game.changeIntegrity(10);
+                game.increaseScore(100);
+                reward.fadeOut();
+            };
+          
+        }
+        
+        
+        
+        //another reward, axe
+          function createReward2(x,y){
+            var reward = game.createGameItem('reward', 25);
+            reward.x = x;
+            reward.y = y;
+            reward.velocityX = -2;
+            
+            var picture = draw.bitmap('img/Axe.png');
+            picture.x = -75;
+            picture.y = -75;
             
             reward.addChild(picture);
             game.addGameItem(reward);
@@ -114,18 +147,16 @@ var level01 = function (window) {
           
         }
         
-        
-        
-        //another reward, WIP
-          function createReward2(x,y){
+        //another reward, axe
+          function createReward3(x,y){
             var reward = game.createGameItem('reward', 25);
             reward.x = x;
             reward.y = y;
             reward.velocityX = -2;
             
-            var picture = draw.bitmap('img/Axe.png');
-            picture.x = -75;
-            picture.y = -75;
+            var picture = draw.bitmap('img/Bumpkin.png');
+            picture.x = -25;
+            picture.y = -25;
             
             reward.addChild(picture);
             game.addGameItem(reward);
@@ -185,6 +216,30 @@ var level01 = function (window) {
             };
             
         }
+        
+        function createEnemy2(x, y){
+            var enemy2 = game.createGameItem('enemy2', 30);
+                enemy2.x = x;
+                enemy2.y = y;
+                enemy2.velocityX = -1.5;
+                game.addGameItem(enemy2);
+            
+            var putin = draw.bitmap('img/putin.png');
+                putin.x = -30;
+                putin.y = -40;
+                
+            enemy2.addChild(putin);
+            
+            enemy2.onPlayerCollision = function(){
+                game.changeIntegrity(-60);
+                enemy2.fadeOut();
+            };
+            
+            enemy2.onProjectileCollision = function(){
+                game.increaseScore(100);
+                enemy2.fadeOut();
+            }
+        }
 
 
         //add sawblades using the gameitem variable in level data.
@@ -202,12 +257,20 @@ var level01 = function (window) {
                 createEnemy(gameItem.x, gameItem.y);
             }
             
+            if (gameItem.type === 'enemy2'){
+                createEnemy2(gameItem.x, gameItem.y);
+            }
+            
             if (gameItem.type === 'reward'){
                 createReward(gameItem.x, gameItem.y);
             }
             
             if (gameItem.type === 'reward2'){
                 createReward2(gameItem.x, gameItem.y);
+            }
+            
+            if (gameItem.type === 'reward3'){
+                createReward3(gameItem.x, gameItem.y);
             }
             
             if (gameItem.type === 'bonus'){
