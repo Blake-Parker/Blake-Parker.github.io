@@ -16,30 +16,49 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
+                //level 1
                 { "type": "sawblade", "x": 400, "y": groundY - 110},
                 { "type": "sawblade", "x": 600, "y": groundY },
                 { "type": "sawblade", "x": 900, "y": groundY - 110},
                 { "type": "sawblade", "x": 1300, "y": groundY },
                 { "type": "sawblade", "x": 1800, "y": groundY - 110},
-                { "type": "sawblade", "x": 2300, "y": groundY - 110},
-                { "type": "sawblade", "x": 2600, "y": groundY},
-                { "type": "sawblade", "x": 3000, "y": groundY - 110},
                 { "type": "spike", "x": 1100, "y": groundY - 10},
                 { "type": "spike", "x": 1500, "y": groundY - 10},
-                { "type": "spike", "x": 2450, "y": groundY - 10},
-                { "type": "spike", "x": 2850, "y": groundY - 10},
-                { "type": "spike", "x": 3150, "y": groundY - 10},
                 { "type": "enemy", "x": 500, "y": groundY - 50},
                 { "type": "enemy", "x": 800, "y": groundY - 50},
                 { "type": "enemy", "x": 1200, "y": groundY - 50},
-                { "type": "enemy2", "x": 2450, "y": groundY - 50},
-                { "type": "enemy2", "x": 2750, "y": groundY - 50},
                 { "type": "reward", "x": 850, "y": groundY - 110},
                 { "type": "reward", "x": 1750, "y": groundY - 110},
                 { "type": "reward2", "x": 1100, "y": groundY - 75},
                 { "type": "reward2", "x": 1500, "y": groundY - 75},
                 { "type": "reward3", "x": 600, "y": groundY - 75},
-                { "type": "bonus", "x": 2000, "y": groundY - 110}
+                { "type": "bonus", "x": 2000, "y": groundY - 110},
+                
+                //level 2
+                { "type": "sawblade", "x": 2300, "y": groundY - 110},
+                { "type": "sawblade", "x": 2600, "y": groundY},
+                { "type": "sawblade", "x": 3000, "y": groundY - 110},
+                { "type": "sawblade", "x": 3300, "y": groundY - 110},
+                { "type": "sawblade", "x": 3400, "y": groundY},
+                { "type": "sawblade", "x": 3500, "y": groundY - 110},
+                { "type": "sawblade", "x": 3750, "y": groundY},
+                { "type": "spike", "x": 2450, "y": groundY - 10},
+                { "type": "spike", "x": 2850, "y": groundY - 10},
+                { "type": "spike", "x": 3150, "y": groundY - 10},
+                { "type": "spike", "x": 3600, "y": groundY - 10},
+                { "type": "spike", "x": 3900, "y": groundY - 10},
+                { "type": "enemy2", "x": 2450, "y": groundY - 50},
+                { "type": "enemy2", "x": 2750, "y": groundY - 50},
+                { "type": "enemy2", "x": 2300, "y": groundY - 50},
+                { "type": "reward", "x": 2600, "y": groundY - 110},
+                { "type": "reward", "x": 3400, "y": groundY - 110},
+                { "type": "reward2", "x": 3150, "y": groundY - 75},
+                { "type": "reward2", "x": 3600, "y": groundY - 75},
+                { "type": "reward3", "x": 3900, "y": groundY - 75},
+                { "type": "bonus", "x": 4200, "y": groundY - 110},
+                
+                //level 3
+                { "type": "sawblade", "x": 4300, "y": groundY},
             ]
         };
         window.levelData = levelData;
@@ -79,28 +98,7 @@ var level01 = function (window) {
             obstacleImage.y = -25;
         
         }
-        //the potato reward        
-       /* function createReward(x, y){
-            var reward = game.createGameItem('reward', 25);
-            var hitZoneSize = 25;
-            var damageFromObstacle = 0;
-            var rewardHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
-            rewardHitZone.x = x;
-            rewardHitZone.y = y;
-            game.addGameItem(rewardHitZone);
-            
-            var obstacleImage = draw.bitmap('img/Potato.png');
-            rewardHitZone.addChild(obstacleImage);
-            obstacleImage.x = -25;
-            obstacleImage.y = -25;
-            
-            reward.onPlayerCollision = function() {   
-                game.changeIntegrity(10);
-                game.increaseScore(100);
-                reward.fadeOut();
-            };
-        }
-        */
+
         //potatoes, good for your heart.
             function createReward(x,y){
             var reward = game.createGameItem('reward', 25);
