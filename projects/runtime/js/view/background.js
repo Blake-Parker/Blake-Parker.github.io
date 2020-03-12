@@ -30,6 +30,7 @@ var background = function (window) {
         var tank;
         var plane;
         var lvl;
+        var lvl2;
         var buildings = [];
         
      
@@ -82,10 +83,11 @@ var background = function (window) {
             }
             
             // TODO 4: Part 1 - Add a tree
-            tree = draw.bitmap('img/tree.png');
+          /*  tree = draw.bitmap('img/tree.png');
             tree.x = 0;
             tree.y = 185;
             background.addChild(tree);
+          */
             
             tank = draw.bitmap('img/tank.png');
             tank.x = 900;
@@ -98,6 +100,11 @@ var background = function (window) {
             lvl.x = 2000;
             lvl.y = groundY - 350;
             background.addChild(lvl);
+            
+            lvl2 = draw.bitmap('img/level2.png');
+            lvl2.x = 4200;
+            lvl2.y = groundY - 350;
+            background.addChild(lvl2)
         } // end of render function - DO NOT DELETE
         
         
@@ -110,7 +117,7 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x - 3;
+            //tree.x = tree.x - 3;
             
             plane.x = plane.x - 10;
             
@@ -119,9 +126,10 @@ var background = function (window) {
             lvl.x = lvl.x - 2
             
                         
-            if(tree.x < -200) {
+            /*if(tree.x < -200) {
                 tree.x = canvasWidth;
             }
+            */
             
             if(plane.x < -2000){
                 plane.x = canvasWidth;

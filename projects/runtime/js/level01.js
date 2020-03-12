@@ -58,7 +58,23 @@ var level01 = function (window) {
                 { "type": "bonus", "x": 4200, "y": groundY - 110},
                 
                 //level 3
-                { "type": "sawblade", "x": 4300, "y": groundY},
+                { "type": "sawblade", "x": 4400, "y": groundY},
+                { "type": "sawblade", "x": 4500, "y": groundY - 110},
+                { "type": "sawblade", "x": 4550, "y": groundY - 110},
+                { "type": "sawblade", "x": 4400, "y": groundY},
+                { "type": "sawblade", "x": 4800, "y": groundY},
+                { "type": "sawblade", "x": 5050, "y": groundY},
+                { "type": "spike", "x": 4650, "y": groundY - 10},
+                { "type": "spike", "x": 4950, "y": groundY - 10},
+                { "type": "spike", "x": 5150, "y": groundY - 10},
+                { "type": "reward", "x": 4650, "y": groundY - 110},
+                { "type": "reward", "x": 5150, "y": groundY - 110},
+                { "type": "reward2", "x": 4400, "y": groundY - 110},
+                { "type": "reward2", "x": 4950, "y": groundY - 110},
+                { "type": "reward3", "x": 5050, "y": groundY - 110},
+                { "type": "enemy3", "x": 3900, "y": groundY - 50},
+                { "type": "enemy3", "x": 4100, "y": groundY - 50},
+                { "type": "enemy3", "x": 4200, "y": groundY - 50},
             ]
         };
         window.levelData = levelData;
@@ -238,6 +254,30 @@ var level01 = function (window) {
                 enemy2.fadeOut();
             }
         }
+        
+        function createEnemy3(x, y){
+            var enemy3 = game.createGameItem('enemy3', 30);
+                enemy3.x = x;
+                enemy3.y = y;
+                enemy3.velocityX = -1.5;
+                game.addGameItem(enemy3);
+            
+            var lenin = draw.bitmap('img/lenin.png');
+                lenin.x = -30;
+                lenin.y = -40;
+                
+            enemy3.addChild(lenin);
+            
+            enemy3.onPlayerCollision = function(){
+                game.changeIntegrity(-60);
+                enemy3.fadeOut();
+            };
+            
+            enemy3.onProjectileCollision = function(){
+                game.increaseScore(100);
+                enemy3.fadeOut();
+            }
+        }
 
 
         //add sawblades using the gameitem variable in level data.
@@ -257,6 +297,10 @@ var level01 = function (window) {
             
             if (gameItem.type === 'enemy2'){
                 createEnemy2(gameItem.x, gameItem.y);
+            }
+            
+            if (gameItem.type === 'enemy3'){
+                createEnemy3(gameItem.x, gameItem.y);
             }
             
             if (gameItem.type === 'reward'){
